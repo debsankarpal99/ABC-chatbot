@@ -100,11 +100,15 @@ const Chatbot = () => {
       setStep(1);
       addBot(`Nice to meet you, ${input}! What's your mobile number?`);
     } else if (step === 1) {
-      setUser((prev) => ({ ...prev, phone: input }));
-      setStep(2);
-      console.log("Lead Captured:", { ...user, phone: input });
-      setMenuStack(["main"]);
-      addBot("Thanks! How can I help you today?", menus["main"]);
+  if (!/^\d{10}$/.test(input)) {
+    addBot("❗ Please enter a valid 10-digit mobile number.");
+    return;
+  }
+  setUser((prev) => ({ ...prev, phone: input }));
+  setStep(2);
+  setMenuStack(["main"]);
+  addBot("Thanks! How can I help you today?", menus["main"]);
+
     }
   };
 
