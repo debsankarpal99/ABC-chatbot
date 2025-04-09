@@ -34,6 +34,8 @@ const Chatbot = () => {
   const chatRef = useRef(null);
   const [journey, setJourney] = useState([]);
   const [courseInterest, setCourseInterest] = useState("");
+  const [hasLogged, setHasLogged] = useState(false);
+
 
   const menus = {
     main: [
@@ -260,17 +262,20 @@ const Chatbot = () => {
   const handleOptionClick = (opt) => {
     addUser(opt.label);
 
-   setJourney((prev) => [...prev, opt.label]);
+setJourney((prev) => [...prev, opt.label]);
 
-const isLeaf = !menus[opt.next]; // no further submenu = leaf
+const isLeaf = !menus[opt.next];
 
-if (isLeaf && user.name && user.phone) {
+if (!hasLogged && user.name && user.phone) {
   logToSheet({
     name: user.name,
     phone: user.phone,
-    course: opt.label, // their final selected option
-    path: [...menuStack.map(k => k), opt.next]
+    course: opt.label,
+    path: [...menuStack, opt.next]
   });
+  setHasLogged(true);
+}
+
 }
 
 
