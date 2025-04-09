@@ -264,17 +264,22 @@ const Chatbot = () => {
 
 setJourney((prev) => [...prev, opt.label]);
 
-const isLeaf = !menus[opt.next];
+const isLeaf = !menus[opt.next]; // check if it's a final option
 
 if (!hasLogged && user.name && user.phone) {
+  const interest = opt.label;
+  const path = [...menuStack.map(k => k), opt.next];
+
   logToSheet({
     name: user.name,
     phone: user.phone,
-    course: opt.label,
-    path: [...menuStack, opt.next]
+    course: interest,
+    path: path
   });
+
   setHasLogged(true);
 }
+
 
 }
 
