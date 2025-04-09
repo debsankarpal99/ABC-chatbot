@@ -12,7 +12,7 @@ const logToSheet = async ({ name, phone, course, path }) => {
   };
 
   try {
-    const res = await fetch("https://script.google.com/macros/s/NEW_DEPLOYED_URL/exec", {
+    const res = await fetch("https://script.google.com/macros/s/AKfycby3UAy-XUAg8I5Dm4Bngbt61t7k4BRjOy-uoTlaxxTbYmYRZxcvTgOhjX0pHXIMeT_YWQ/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
