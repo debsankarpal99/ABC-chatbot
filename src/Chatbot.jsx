@@ -34,8 +34,6 @@ const Chatbot = () => {
   const chatRef = useRef(null);
   const [journey, setJourney] = useState([]);
   const [courseInterest, setCourseInterest] = useState("");
-  const [hasLogged, setHasLogged] = useState(false);
-
 
   const menus = {
     main: [
@@ -262,38 +260,17 @@ const Chatbot = () => {
   const handleOptionClick = (opt) => {
     addUser(opt.label);
 
-const interest = opt.label;
-const path = [...menuStack, opt.next]; // capture before setState
-const isLeaf = !menus[opt.next];
+   setJourney((prev) => [...prev, opt.label]);
 
-setJourney((prev) => [...prev, interest]);
-setMenuStack((prev) => [...prev, opt.next]);
-addUserMessage(interest);
+const isLeaf = !menus[opt.next]; // no further submenu = leaf
 
-setTimeout(() => {
-  setTyping(true);
-  setTimeout(() => {
-    setTyping(false);
-    if (menus[opt.next]) {
-      addBot("Choose an option:", menus[opt.next]);
-    } else {
-      addBot(responses[opt.next] || "Here's the info.");
-    }
-  }, 800);
-}, 300);
-
-// log only once, use captured values
-if (!hasLogged && user.name && user.phone) {
+if (isLeaf && user.name && user.phone) {
   logToSheet({
     name: user.name,
     phone: user.phone,
-    course: interest,
-    path: path
+    course: opt.label, // their final selected option
+    path: [...menuStack.map(k => k), opt.next]
   });
-  setHasLogged(true);
-}
-
-
 }
 
 
@@ -400,6 +377,7 @@ if (!hasLogged && user.name && user.phone) {
       )}
     </div>
   );
+};
 
 const styles = {
   wrapper: {
