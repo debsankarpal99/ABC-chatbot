@@ -8,7 +8,7 @@ const logToSheet = async ({ name, phone, course, path }) => {
   };
 
   await fetch(
-    "https://script.google.com/macros/s/AKfycbzKbW5ZdPJ4WkyG1Iqe2gn_IJLADO84UFmzQaDkUPapbrR9L3g6PYeCQg289jAcM5nAYw/exec",
+    "https://script.google.com/macros/s/AKfycby3UAy-XUAg8I5Dm4Bngbt61t7k4BRjOy-uoTlaxxTbYmYRZxcvTgOhjX0pHXIMeT_YWQ/exec",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
