@@ -2,20 +2,29 @@ import React, { useState, useEffect, useRef } from "react";
 
 const logToSheet = async ({ name, phone, course, path }) => {
   const payload = {
-    values: [
-      [new Date().toLocaleString(), name, phone, course, path.join(" > ")],
-    ],
+    values: [[
+      new Date().toLocaleString(),
+      name,
+      phone,
+      course,
+      path.join(" > ")
+    ]]
   };
 
-  await fetch(
-    "https://script.google.com/macros/s/AKfycby3UAy-XUAg8I5Dm4Bngbt61t7k4BRjOy-uoTlaxxTbYmYRZxcvTgOhjX0pHXIMeT_YWQ/exec",
-    {
+  try {
+    const res = await fetch("https://script.google.com/macros/s/NEW_DEPLOYED_URL/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }
-  );
+      body: JSON.stringify(payload)
+    });
+
+    const result = await res.text();
+    console.log("✅ Google Sheet Response:", result);
+  } catch (err) {
+    console.error("❌ Failed to send to Google Sheets:", err);
+  }
 };
+
 
 const Chatbot = () => {
   const [step, setStep] = useState(0);
