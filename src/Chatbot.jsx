@@ -260,15 +260,20 @@ const Chatbot = () => {
   const handleOptionClick = (opt) => {
     addUser(opt.label);
 
-    setJourney((prev) => [...prev, opt.label]);
+   setJourney((prev) => [...prev, opt.label]);
 
-    if (
-      ["cfaLevel1", "cfaLevel2", "cfaLevel3", "frmPart1", "frmPart2"].includes(
-        opt.next
-      )
-    ) {
-      setCourseInterest(opt.label);
-    }
+const isLeaf = !menus[opt.next]; // no further submenu = leaf
+
+if (isLeaf && user.name && user.phone) {
+  logToSheet({
+    name: user.name,
+    phone: user.phone,
+    course: opt.label, // their final selected option
+    path: [...menuStack.map(k => k), opt.next]
+  });
+}
+
+
 
     // BACK button handler
     if (opt.next === "back") {
