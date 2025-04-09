@@ -262,12 +262,27 @@ const Chatbot = () => {
   const handleOptionClick = (opt) => {
     addUser(opt.label);
 
-const isLeaf = !menus[opt.next];
 const interest = opt.label;
-const path = [...menuStack, opt.next]; // get stack before it's updated
+const path = [...menuStack, opt.next]; // capture before setState
+const isLeaf = !menus[opt.next];
 
 setJourney((prev) => [...prev, interest]);
+setMenuStack((prev) => [...prev, opt.next]);
+addUserMessage(interest);
 
+setTimeout(() => {
+  setTyping(true);
+  setTimeout(() => {
+    setTyping(false);
+    if (menus[opt.next]) {
+      addBot("Choose an option:", menus[opt.next]);
+    } else {
+      addBot(responses[opt.next] || "Here's the info.");
+    }
+  }, 800);
+}, 300);
+
+// log only once, use captured values
 if (!hasLogged && user.name && user.phone) {
   logToSheet({
     name: user.name,
