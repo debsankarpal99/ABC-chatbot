@@ -400,7 +400,6 @@ if (!hasLogged && user.name && user.phone) {
       )}
     </div>
   );
-};
 
 const styles = {
   wrapper: {
