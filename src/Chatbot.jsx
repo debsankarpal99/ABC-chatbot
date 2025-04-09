@@ -262,21 +262,19 @@ const Chatbot = () => {
   const handleOptionClick = (opt) => {
     addUser(opt.label);
 
-setJourney((prev) => [...prev, opt.label]);
+const isLeaf = !menus[opt.next];
+const interest = opt.label;
+const path = [...menuStack, opt.next]; // get stack before it's updated
 
-const isLeaf = !menus[opt.next]; // check if it's a final option
+setJourney((prev) => [...prev, interest]);
 
 if (!hasLogged && user.name && user.phone) {
-  const interest = opt.label;
-  const path = [...menuStack.map(k => k), opt.next];
-
   logToSheet({
     name: user.name,
     phone: user.phone,
     course: interest,
     path: path
   });
-
   setHasLogged(true);
 }
 
