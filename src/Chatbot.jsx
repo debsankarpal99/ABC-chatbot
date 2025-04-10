@@ -495,7 +495,7 @@ headerCall: {
   fontSize: "20px",
   color: "#fff",
   textDecoration: "none",
-},
+}
 
 };
 
