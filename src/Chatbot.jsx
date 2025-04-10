@@ -209,7 +209,7 @@ const Chatbot = () => {
   };
 
   useEffect(() => {
-    addBot("Hi! What's your name?");
+    addBot("Hi there from Team Aswini Bajaj! What's your name?");
   }, []);
 
   useEffect(() => {
@@ -308,13 +308,17 @@ if (isLeaf && user.name && user.phone) {
   };
 
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.topBar}>
-        <span>🟢 Online</span>
-        <a href="tel:+919000000000" title="Call us" style={styles.callIcon}>
-          📞
-        </a>
-      </div>
+    <div style={styles.customHeader}>
+  <img src="https://aswinibajajclasses.com/_next/image?url=%2Flogo.png&w=64&q=75" alt="Logo" style={styles.logo} />
+  <div>
+    <div style={styles.headerTitle}>Team Aswini Bajaj</div>
+    <div style={styles.onlineStatus}>🟢 Online</div>
+  </div>
+  <a href="tel:+919831779747" title="Call us" style={styles.headerCall}>
+    📞
+  </a>
+</div>
+
 
       <div ref={chatRef} style={styles.chatBox}>
         {chatHistory.map((msg, idx) => (
@@ -466,6 +470,33 @@ const styles = {
     borderRadius: "20px",
     cursor: "pointer",
   },
+      customHeader: {
+  backgroundColor: "#2963b4",
+  padding: "10px 15px",
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+  color: "#fff",
+},
+logo: {
+  width: "35px",
+  height: "35px",
+  borderRadius: "8px",
+},
+headerTitle: {
+  fontWeight: "bold",
+  fontSize: "16px",
+},
+onlineStatus: {
+  fontSize: "12px",
+},
+headerCall: {
+  marginLeft: "auto",
+  fontSize: "20px",
+  color: "#fff",
+  textDecoration: "none",
+},
+
 };
 
 export default Chatbot;
