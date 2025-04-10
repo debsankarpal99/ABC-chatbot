@@ -29,7 +29,7 @@ const Chatbot = () => {
   const [step, setStep] = useState(0);
   const [chatHistory, setChatHistory] = useState([]);
   const [typing, setTyping] = useState(false);
-  const [user, setUser] = useState({ : "", phone: "" });
+  const [user, setUser] = useState({ name: "", phone: "" });
   const [menuStack, setMenuStack] = useState([]);
   const chatRef = useRef(null);
   const [journey, setJourney] = useState([]);
@@ -209,7 +209,7 @@ const Chatbot = () => {
   };
 
   useEffect(() => {
-    addBot("Hi there from Team Aswini Bajaj! What's your name?");
+    addBot("Hi! What's your name?");
   }, []);
 
   useEffect(() => {
@@ -234,7 +234,7 @@ const Chatbot = () => {
     addUser(input);
 
     if (step === 0) {
-      setUser((prev) => ({ ...prev, : input }));
+      setUser((prev) => ({ ...prev, name: input }));
       setStep(1);
       addBot(`Nice to meet you, ${input}! What's your mobile number?`);
     } else if (step === 1) {
@@ -249,7 +249,7 @@ const Chatbot = () => {
 
       // log to sheet
       logToSheet({
-        : user.,
+        name: user.name,
         phone: input,
         course: courseInterest,
         path: journey,
