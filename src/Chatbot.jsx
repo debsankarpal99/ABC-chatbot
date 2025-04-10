@@ -209,7 +209,7 @@ const Chatbot = () => {
   };
 
   useEffect(() => {
-    addBot("Hi! What's your name?");
+    addBot(" Hi there from Team Aswini Bajaj! What's your name?");
   }, []);
 
   useEffect(() => {
