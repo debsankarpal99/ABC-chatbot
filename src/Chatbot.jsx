@@ -58,7 +58,7 @@ const Chatbot = () => {
       { label: "📗 Level I", next: "cfaLevel1" },
       { label: "📘 Level II", next: "cfaLevel2" },
       { label: "📙 Level III", next: "cfaLevel3" },
-      { label: "🔙 Back", next: "courses" },
+      { label: "Back", next: "courses" },
     ],
     frm: [
       { label: "🧮 Part I", next: "frmPart1" },
